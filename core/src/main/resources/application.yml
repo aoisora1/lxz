@@ -1,0 +1,30 @@
+server:
+  port: 8080 # 后端访问端口
+  servlet:
+    context-path: /lxz/ # 对外接口前缀
+
+logging:
+  config: classpath:log.xml # log配置文件
+
+mybatis-plus:
+  configuration:
+    cache-enabled: false # 关闭二级缓存
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开始sql打印
+
+spring:
+  profiles:
+    active: @spring.profile@
+  messages:
+    basename: i18n/error/message,i18n/error/description,i18n/error/solution
+
+game:
+  pool:
+    configs:
+      gobang:
+        core-size : 2
+        max-size : 10
+        keep-alive-time : 100
+      default:
+        core-size: 2
+        max-size: 10
+        keep-alive-time: 100

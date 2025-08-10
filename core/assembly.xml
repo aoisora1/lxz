@@ -1,0 +1,52 @@
+<assembly>
+    <id>assembly</id>
+
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <fileSets>
+        <!--  复制bin目录 -->
+        <fileSet>
+            <directory>bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
+            <filtered>true</filtered>
+        </fileSet>
+
+        <!--  复制自身jar包到lib目录 -->
+        <fileSet>
+            <directory>target</directory>
+            <includes>
+                <include>${project.artifactId}-${project.parent.version}.jar</include>
+            </includes>
+            <outputDirectory>lib</outputDirectory>
+            <fileMode>0755</fileMode>
+            <filtered>true</filtered>
+        </fileSet>
+
+        <!--  复制lib目录 -->
+        <fileSet>
+            <directory>target/core/lib</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <fileMode>0755</fileMode>
+            <filtered>true</filtered>
+        </fileSet>
+
+        <!--  复制conf目录 -->
+        <fileSet>
+            <directory>conf</directory>
+            <outputDirectory>conf</outputDirectory>
+            <fileMode>0755</fileMode>
+            <filtered>true</filtered>
+        </fileSet>
+    </fileSets>
+
+</assembly>

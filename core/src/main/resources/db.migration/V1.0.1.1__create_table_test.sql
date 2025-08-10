@@ -1,0 +1,1 @@
+create table test_table (id varchar(32),name varchar(100),description varchar(5000),create_time datetime,create_user varchar(100),update_time datetime,update_user varchar(100), PRIMARY KEY(id));
