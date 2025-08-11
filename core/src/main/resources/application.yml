@@ -17,6 +17,9 @@ spring:
   messages:
     basename: i18n/error/message,i18n/error/description,i18n/error/solution
 
+  flyway:
+    locations: classpath:db/migration
+
 game:
   pool:
     configs:
