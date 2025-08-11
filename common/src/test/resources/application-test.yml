@@ -1,10 +1,19 @@
+mybatis-plus:
+  configuration:
+    cache-enabled: false # 关闭二级缓存
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开始sql打印
+
 spring:
+  messages:
+    basename: i18n/error/message,i18n/error/description,i18n/error/solution
   datasource:
     url: jdbc:h2:D:/H2/db/lxz;MODE=Mysql;DB_CLOSE_DELAY=-1
     username: lxz
     password: 123456
     driver-class-name: org.h2.Driver
-    # TODO 为什么application.yml没用
+
+# TODO 换成测试单独的数据库，但是flyway脚本没有执行
+
   flyway:
     locations: classpath:db/migration
 

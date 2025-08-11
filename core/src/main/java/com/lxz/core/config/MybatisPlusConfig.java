@@ -39,6 +39,7 @@ public class MybatisPlusConfig {
 
         @Override
         public void insertFill(MetaObject metaObject) {
+            // TODO 没生效
             this.strictInsertFill(metaObject, "createTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
             this.strictInsertFill(metaObject, "createUser", String.class, UserHolder.userName()); // TODO
         }
