@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 @TableName("test_table")
 public class TestTableEntity {
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String name;
 

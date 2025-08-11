@@ -126,11 +126,11 @@ public class Gobang extends Game {
         return x >= 0 && x < xCount && y >= 0 && y < yCount;
     }
 
-    private Player getP(Integer id) {
-        if (p0.id.compareTo(id) == 0) {
+    private Player getP(int id) {
+        if (p0.id == id) {
             return p0;
         }
-        if (p1.id.compareTo(id) == 0) {
+        if (p1.id == id) {
             return p1;
         }
         throw new RuntimeException("对局异常");
