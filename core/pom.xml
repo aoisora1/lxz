@@ -81,7 +81,13 @@
                 <directory>src/test/resources</directory>
             </testResource>
             <testResource>
-                <directory>src/main/resources/db/migration</directory>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application.yml</include>
+                </includes>
+            </testResource>
+            <testResource>
+                <directory>src/main/resources/db.migration</directory>
                 <targetPath>db/migration</targetPath>
                 <includes>
                     <include>*.sql</include>

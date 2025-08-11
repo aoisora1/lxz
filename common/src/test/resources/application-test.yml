@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:D:/H2/db/lxz;MODE=Mysql;DB_CLOSE_DELAY=-1
+    username: lxz
+    password: 123456
+    driver-class-name: org.h2.Driver
+    # TODO 为什么application.yml没用
+  flyway:
+    locations: classpath:db/migration
+
+game:
+  pool:
+    configs:
+      gobang:
+        core-size : 2
+        max-size : 10
+        keep-alive-time : 100
+      default:
+        core-size: 2
+        max-size: 10
+        keep-alive-time: 100
