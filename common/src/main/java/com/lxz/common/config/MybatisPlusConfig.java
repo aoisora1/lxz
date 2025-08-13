@@ -1,9 +1,9 @@
-package com.lxz.core.config;
+package com.lxz.common.config;
 
-import com.lxz.common.util.UserHolder;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.lxz.common.util.UserHolder;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +39,6 @@ public class MybatisPlusConfig {
 
         @Override
         public void insertFill(MetaObject metaObject) {
-            // TODO 没生效
             this.strictInsertFill(metaObject, "createTime", Timestamp.class, new Timestamp(System.currentTimeMillis()));
             this.strictInsertFill(metaObject, "createUser", String.class, UserHolder.userName()); // TODO
         }
