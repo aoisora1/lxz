@@ -21,6 +21,13 @@ spring security sso登录，spring redis session
 
 用户注册登录
 
+### 架构调整
+user和game拆分微服务，各自管理flyway脚本
+
+common拆成starter autoconfig做公共配置和公共代码仓
+
+大pom拆成一个仓，作为parent，引入common拆出来的两个包
+
 ## 架构优化
 ### 拆分微服务 
 #### 游戏中心 
