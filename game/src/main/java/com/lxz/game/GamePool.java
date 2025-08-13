@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -19,8 +20,9 @@ public class GamePool {
     private long expirationTime;
     private Lock lock;
     private GameFactory gameFactory;
+    private ScheduledThreadPoolExecutor executor;
 
-    public GamePool(GamePoolProperties properties, GameFactory gameFactory) {
+    public GamePool(GamePoolProperties properties, GameFactory gameFactory, ScheduledThreadPoolExecutor executor) {
         this.gaming = new HashMap<>();
         this.coreGame = new ArrayList<>();
         this.properties = properties;
@@ -29,6 +31,7 @@ public class GamePool {
         this.startDaemon();
         this.lock = new ReentrantLock();
         this.gameFactory = gameFactory;
+        this.executor = executor;
     }
 
     public Game newGame(StartContext context) {
@@ -92,22 +95,13 @@ public class GamePool {
     }
 
     private void startDaemon() {
-        Thread thread = new Thread(() -> {
-            while (true) {
-                logger.info("开始释放非核心空闲对局");
-                logger.info("对局信息：进行中对局{}，非核心空闲对局{}", gaming.size(), gamesFree.size());
-                releaseFree();
-                logger.info("对局信息：进行中对局{}，非核心空闲对局{}", gaming.size(), gamesFree.size());
-                logger.info("结束释放非核心空闲对局");
-                try {
-                    Thread.sleep(TimeUnit.MINUTES.toMillis(1));
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        thread.setDaemon(true);
-        thread.start();
+        executor.schedule(() -> {
+            logger.info("开始释放非核心空闲对局");
+            logger.info("对局信息：进行中对局{}，非核心空闲对局{}", gaming.size(), gamesFree.size());
+            releaseFree();
+            logger.info("对局信息：进行中对局{}，非核心空闲对局{}", gaming.size(), gamesFree.size());
+            logger.info("结束释放非核心空闲对局");
+        }, 1L, TimeUnit.MINUTES);
     }
 
     private void releaseFree() {
