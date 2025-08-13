@@ -28,10 +28,10 @@ public class GamePool {
         this.properties = properties;
         this.gamesFree = new LinkedList<>();
         this.expirationTime = (long) properties.getKeepAliveTime() * 60 * 1000;
-        this.startDaemon();
         this.lock = new ReentrantLock();
         this.gameFactory = gameFactory;
         this.executor = executor;
+        this.startDaemon();
     }
 
     public Game newGame(StartContext context) {
@@ -95,13 +95,13 @@ public class GamePool {
     }
 
     private void startDaemon() {
-        executor.schedule(() -> {
+        executor.scheduleWithFixedDelay(() -> {
             logger.info("开始释放非核心空闲对局");
             logger.info("对局信息：进行中对局{}，非核心空闲对局{}", gaming.size(), gamesFree.size());
             releaseFree();
             logger.info("对局信息：进行中对局{}，非核心空闲对局{}", gaming.size(), gamesFree.size());
             logger.info("结束释放非核心空闲对局");
-        }, 1L, TimeUnit.MINUTES);
+        }, 1L, 1L, TimeUnit.MINUTES);
     }
 
     private void releaseFree() {

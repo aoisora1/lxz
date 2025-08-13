@@ -18,7 +18,7 @@ public class GamePoolDaemonThreadPoolConfig {
 
     @Bean("gamePoolDaemonThreadPool")
     public ScheduledThreadPoolExecutor gamePoolDaemonThreadPool() {
-        ThreadFactory tFactory = new ThreadFactoryBuilder().setDaemon(true).setNameFormat("game-pool-daemon").build();
+        ThreadFactory tFactory = new ThreadFactoryBuilder().setDaemon(true).setNameFormat("game-pool-daemon-%d").build();
         return new ScheduledThreadPoolExecutor(GameEnum.values().length, tFactory);
     }
 }

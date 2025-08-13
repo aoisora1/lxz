@@ -1,7 +1,7 @@
 package com.lxz.game.config;
 
 import com.lxz.game.*;
-import org.springframework.boot.context.properties.bind.Name;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 public class GameConfiguration {
 
     @Bean
-    public GamePoolManager gamePoolManager(GameFactory gameFactory, GameProperties gameProperties, @Name("gamePoolDaemonThreadPool") ScheduledThreadPoolExecutor executor) {
+    public GamePoolManager gamePoolManager(GameFactory gameFactory, GameProperties gameProperties, @Qualifier("gamePoolDaemonThreadPool") ScheduledThreadPoolExecutor executor) {
         Map<Integer, GamePool> gamePoolMap = new HashMap<>();
         for (GameEnum gameEnum : GameEnum.values()) {
             GamePool gamePool;
